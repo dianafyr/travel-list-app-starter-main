@@ -42,6 +42,7 @@ export default function Form({ onAddItem, onSortChange, onClearAll }) {
             </option>
           ))}
         </select>
+        <button type="submit">Add</button>
         
         <select onChange={(e) => onSortChange(e.target.value)} className="sort-select">
           <option value="id">Input Order</option>
@@ -50,7 +51,6 @@ export default function Form({ onAddItem, onSortChange, onClearAll }) {
         </select>
       </div>
 
-      <button type="submit">Add</button>
       <button type="button" onClick={onClearAll} className="clear-all">
         Clear All Items
       </button>
