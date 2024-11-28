@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
-import Logo from './Logo';
-import Form from './Form';
-import Stats from './Stats';
-import PackingList from './PackingList'
+import React, { useState } from "react";
+import Logo from "./Logo";
+import PackingList from "./PackingList";
+import Form from "./Form";
+import Stats from "./Stats";
 
 function App() {
   const [items, setItems] = useState([]);
-  const [sortItems, setSortItems] = useState('id'); // Default to 'id' for input order
 
   const handleAdd = (newItem) => {
     setItems([...items, newItem]);
@@ -24,27 +23,26 @@ function App() {
     );
   };
 
-  const handleSortChange = (sortBy) => {
-    setSortItems(sortBy); // Update sort order when user selects an option
-  };
-
-  // Function to clear all items
-  const handleClearAll = () => {
-    const confirmClear = window.confirm("Are you sure you want to clear all items?");
-    if (confirmClear) {
-      setItems([]); // Clear all items
-    }
+  const handleEditItem = (id, newDescription, newQuantity) => {
+    setItems(
+      items.map((item) =>
+        item.id === id
+          ? { ...item, description: newDescription, quantity: newQuantity }
+          : item
+      )
+    );
   };
 
   return (
     <div className="app">
       <Logo />
-      <Form onAddItem={handleAdd} onSortChange={handleSortChange} onClearAll={handleClearAll} />
+      <Form onAddItem={handleAdd} />
       <PackingList
         items={items}
         onDeleteItem={handleDelete}
         onTogglePacked={handleToggle}
-        sortItems={sortItems}
+        onEditItem={handleEditItem}
+        sortItems="id" // You can pass your sorting logic here
       />
       <Stats items={items} />
     </div>
@@ -52,4 +50,3 @@ function App() {
 }
 
 export default App;
-
