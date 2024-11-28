@@ -1,6 +1,7 @@
 import React from 'react';
 
 function Item({ item, onDeleteItem, onTogglePacked }) {
+  
   function handleDelete() {
     const confirmDelete = window.confirm(
       `Are you sure you want to remove ${item.description}?`
